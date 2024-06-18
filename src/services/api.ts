@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../types/User";
+import { UserRegister } from "../types/UserRegister";
 
 const apiClient = axios.create({
     baseURL: `${import.meta.env.VITE_API_URL}/api`,
@@ -11,10 +11,10 @@ const apiClient = axios.create({
 });
 
 export default {
-    register(user: User) {
+    register(user: UserRegister) {
         return apiClient.post("/auth/register", user);
     },
-    login(user: User) {
+    login(user: UserRegister) {
         return apiClient.post("/auth/login", user);
     },
 }

@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { auth } from "../firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import axios from "axios";
+import api from '../services/api';
+import { UserRegister } from "../types/UserRegister";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -29,12 +30,14 @@ export const useAuthStore = defineStore('auth', {
         async register(username: string, password: string) {
             try {
                 console.log(this.idGoogle);
-                
-                const response = await axios.post('http://localhost:5082/api/auth/register', {
-                    idGoogle: this.idGoogle,
+
+                const user: UserRegister = {
                     username,
                     password,
-                });
+                    idGoogle: this.idGoogle as string,
+                };
+                
+                const response = await api.register(user as UserRegister);
                 console.log('User registered', response.data);
             } catch (error) {
                 console.error('Error during registration', error);
