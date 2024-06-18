@@ -42,6 +42,19 @@ export const useAuthStore = defineStore('auth', {
             } catch (error) {
                 console.error('Error during registration', error);
             }
-        }
+        },
+        async login(username: string, password: string) {
+            try {
+                const user: UserRegister = {
+                    username,
+                    password,
+                };
+
+                const response = await api.login(user as UserRegister);
+                console.log('User logged in', response.data);
+            } catch (error) {
+                console.error('Error during login', error);
+            }
+        },
     }
 })
