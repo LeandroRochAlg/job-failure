@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
                     idGoogle: this.idGoogle as string,
                 };
                 
-                const response = await api.register(user as UserRegister);
+                const response = await api.register(user);
                 console.log('User registered', response.data);
             } catch (error) {
                 console.error('Error during registration', error);
@@ -50,7 +50,7 @@ export const useAuthStore = defineStore('auth', {
                     password,
                 };
 
-                const response = await api.login(user as UserRegister);
+                const response = await api.login(user);
                 console.log('User logged in', response.data);
             } catch (error) {
                 console.error('Error during login', error);
