@@ -3,6 +3,7 @@ import { auth } from "../firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import api from '../services/api';
 import { UserRegister } from "../types/UserRegister";
+import { AxiosError } from "axios";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -40,7 +41,8 @@ export const useAuthStore = defineStore('auth', {
                 const response = await api.register(user);
                 console.log('User registered', response.data);
             } catch (error) {
-                console.error('Error during registration', error);
+                const axiosError = error as AxiosError;
+                console.error(axiosError.response?.data);
             }
         },
         async login(username: string, password: string) {
@@ -53,7 +55,8 @@ export const useAuthStore = defineStore('auth', {
                 const response = await api.login(user);
                 console.log('User logged in', response.data);
             } catch (error) {
-                console.error('Error during login', error);
+                const axiosError = error as AxiosError;
+                console.error(axiosError.response?.data);
             }
         },
     }
