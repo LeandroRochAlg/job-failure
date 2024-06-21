@@ -17,4 +17,10 @@ export default {
     login(user: UserRegister) {
         return apiClient.post("/auth/login", user);
     },
+    logout() {
+        return apiClient.post("/auth/logout");
+    },
+    check() {
+        return apiClient.get("/secure/check");
+    }
 }
