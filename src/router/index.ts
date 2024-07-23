@@ -22,13 +22,13 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'Login',
                 component: LoginView,
             },
-            {
-                path: "/home",
-                name: "Home",
-                component: HomeView,
-                meta: { requiresAuth: true },
-            }
         ]
+    },
+    {
+        path: "/home",
+        name: "Home",
+        component: HomeView,
+        meta: { requiresAuth: true },
     }
 ];
 
