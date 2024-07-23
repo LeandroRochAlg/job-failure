@@ -16,7 +16,7 @@
         <button class="flex mx-auto hover:bg-darkLight p-2 rounded-xl">
             <img :src="googleLogo" alt="Google Logo" class="w-[30px]">
         </button>
-        <Alternative/>
+        <Alternative route='/register'/>
     </div>
 </template>
 
