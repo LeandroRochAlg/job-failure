@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[400px] h-[500px] mx-auto font-montserrat flex flex-col align-middle bg-light rounded-tr-xl rounded-bl-xl shadow-xl justify-between">
+    <div class="w-[400px] h-[500px] mx-auto font-montserrat flex flex-col align-middle bg-light dark:bg-dark rounded-tr-xl rounded-bl-xl shadow-xl justify-between">
         <form @submit.prevent="login" class="flex flex-col h-full justify-between w-full">
             <Title title="Login"/>
             <div class="w-full flex flex-col">
@@ -9,11 +9,11 @@
             <Button title="Login"/>
         </form>
         <div class="w-full flex items-center justify-center my-6">
-            <div class="flex-grow border-t border-dark"></div>
-            <span class="mx-2 text-dark text-sm">or login with</span>
-            <div class="flex-grow border-t border-dark"></div>
+            <div class="flex-grow border-t border-dark dark:border-light"></div>
+            <span class="mx-2 text-dark text-sm dark:text-light">or login with</span>
+            <div class="flex-grow border-t border-dark dark:border-light"></div>
         </div>
-        <button class="flex mx-auto hover:bg-darkLight p-2 rounded-xl">
+        <button class="flex mx-auto hover:bg-darkLight dark:hover:bg-lightDark p-2 rounded-xl">
             <img :src="googleLogo" alt="Google Logo" class="w-[30px]">
         </button>
         <Alternative route='/register'/>

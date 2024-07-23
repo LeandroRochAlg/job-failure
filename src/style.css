@@ -5,21 +5,36 @@
 @import 'tailwindcss/utilities';
 
 @layer components {
-    .bg-custom-pattern {
+    .bg-custom-pattern-light {
         position: relative;
         overflow: hidden;
         background-color: #F1EFF5;
         z-index: 1;
     }
 
-    .bg-custom-pattern::before,
-    .bg-custom-pattern::after {
+    .bg-custom-pattern-light::before {
         content: "";
         position: absolute;
         z-index: -1;
+        width: 150vw;
+        height: 100vw;
+        border-radius: 50%;
+        background: #600460;
+        top: -160vh;
+        left: -25vw;
     }
-  
-    .bg-custom-pattern::before {
+
+    .bg-custom-pattern-dark {
+        position: relative;
+        overflow: hidden;
+        background-color: #2B2A2C;
+        z-index: 1;
+    }
+
+    .bg-custom-pattern-dark::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
         width: 150vw;
         height: 100vw;
         border-radius: 50%;

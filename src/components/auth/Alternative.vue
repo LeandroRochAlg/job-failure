@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center text-sm italic my-6 text-dark">
+    <div class="text-center text-sm italic my-6 text-dark dark:text-light">
         <p class="font-light">{{ text1 }}</p>
         <p class="font-bold hover:underline"><a :href="props.route">{{ text2 }}</a></p>
     </div>
