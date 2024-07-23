@@ -3,3 +3,28 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .bg-custom-pattern {
+        position: relative;
+        overflow: hidden;
+        background-color: #F1EFF5;
+        z-index: 1;
+    }
+
+    .bg-custom-pattern::before,
+    .bg-custom-pattern::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+    }
+  
+    .bg-custom-pattern::before {
+        width: 150vw;
+        height: 100vw;
+        border-radius: 50%;
+        background: #600460;
+        top: -160vh;
+        left: -25vw;
+    }
+}

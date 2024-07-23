@@ -1,5 +1,5 @@
 <template>
-    <main class="h-[100vh] flex flex-col align-middle justify-center bg-light">
+    <main class="h-[100vh] flex flex-col align-middle justify-center bg-custom-pattern">
         <router-view />
     </main>
   </template>
