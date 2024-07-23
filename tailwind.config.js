@@ -14,6 +14,19 @@ export default {
     },
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],
+    },
+    extend: {
+      boxShadow: {
+        'lg': '0 0 10px 0 rgba(0, 0, 0, 0.3)',
+        'xl': '0 0 15px 0 rgba(0, 0, 0, 0.3)',
+        'primary': '0 0px 10px 0 rgba(96, 4, 96, 0.9)'
+      },
+      transitionProperty: {
+        'shadow': 'box-shadow',
+      },
+      transitionDuration: {
+        '300': '300ms',
+      }
     }
   },
   plugins: [

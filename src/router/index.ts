@@ -2,26 +2,33 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import RegisterView from "../views/RegisterView.vue";
 import LoginView from "../views/LoginView.vue";
 import HomeView from "../views/HomeView.vue";
+import AuthLayout from "../layouts/AuthLayout.vue";
 import api from "../services/api";
 
 const url = import.meta.env.BASE_URL;
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: "/register",
-        name: "Register",
-        component: RegisterView,
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: LoginView,
-    },
-    {
-        path: "/home",
-        name: "Home",
-        component: HomeView,
-        meta: { requiresAuth: true },
+        path: "/auth",
+        component: AuthLayout,
+        children: [
+            {
+                path: "/register",
+                name: "Register",
+                component: RegisterView,
+            },
+            {
+                path: '/login',
+                name: 'Login',
+                component: LoginView,
+            },
+            {
+                path: "/home",
+                name: "Home",
+                component: HomeView,
+                meta: { requiresAuth: true },
+            }
+        ]
     }
 ];
 

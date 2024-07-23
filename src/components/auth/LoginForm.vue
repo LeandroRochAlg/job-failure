@@ -1,30 +1,28 @@
 <template>
-    <div class="w-1/4 h-full mx-auto font-montserrat flex flex-col align-middle justify-center">
-        <h2 class="text-primary text-6xl mb-5">Login</h2>
-        <form @submit.prevent="login" class="flex flex-col">
-            <input v-model="username" placeholder="Username" required class="focus:outline-none focus:underline hover:underline mt-2 border-none bg-darkLight rounded-t-xl">
-            <input v-model="password" type="password" placeholder="Password" required class="focus:outline-none focus:underline hover:underline mt-1 border-none bg-darkLight rounded-b-xl">
-            <button type="submit" class="h-10 bg-primary rounded-full w-1/2 text-light uppercase font-bold mx-auto mt-5">Login</button>
+    <div class="w-[400px] h-[500px] mx-auto font-montserrat flex flex-col align-middle bg-light rounded-tr-xl rounded-bl-xl shadow-xl">
+        <form @submit.prevent="login" class="flex flex-col h-full justify-between w-full">
+            <Title title="Login"/>
+            <div class="w-full flex flex-col">
+                <Input type="text" v-model="username" placeHolder="Username" position="top"/>
+                <Input type="password" v-model="password" placeHolder="Password" position="bottom"/>
+            </div>
+            <Button title="Login"/>
         </form>
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { useAuthStore } from '../../stores/auth';
+import Button from './Button.vue';
+import Input from './Input.vue';
+import Title from './Title.vue';
 
-export default defineComponent({
-    name: 'Login',
-    setup() {
-        const authStore = useAuthStore();
-        const username = ref('');
-        const password = ref('');
+const authStore = useAuthStore();
+const username = ref('');
+const password = ref('');
 
-        const login = async () => {
-            await authStore.login(username.value, password.value);
-        };
-
-        return { username, password, login };
-    }
-});
+const login = async () => {
+    await authStore.login(username.value, password.value);
+};
 </script>
