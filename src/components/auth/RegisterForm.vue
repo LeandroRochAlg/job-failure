@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="register" class="flex flex-col h-full justify-between w-full">
+    <form @submit.prevent="register" class="flex flex-col h-full justify-evenly w-full">
         <div class="w-full flex flex-col">
             <Input type="text" v-model="username" placeHolder="Username" position="top"/>
             <Input type="password" v-model="password" placeHolder="Password" position="center"/>
