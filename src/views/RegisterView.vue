@@ -3,7 +3,7 @@
         <Title title="Register" />
         <GoogleSignIn v-if="!isAuthenticated" @auth-success="handleAuthSuccess" />
         <RegisterForm v-else />
-        <p class="text-light">{{ googleUsername }}</p>
+        <GoogleUser v-if="isAuthenticated" :profile-pic="googleProfilePicture" :username="googleUsername"/>
         <Alternative route="/login" />
     </Card>
 </template>
@@ -15,11 +15,13 @@ import GoogleSignIn from '../components/auth/GoogleSignIn.vue';
 import RegisterForm from '../components/auth/RegisterForm.vue';
 import Title from '../components/auth/Title.vue';
 import Alternative from '../components/auth/Alternative.vue';
+import GoogleUser from '../components/auth/GoogleUser.vue';
 import { useAuthStore } from '../stores/auth';
 
 const authStore = useAuthStore();
 const isAuthenticated = ref(authStore.isAuthenticated);
 const googleUsername = ref(authStore.googleUsername); // Get google username from local storage
+const googleProfilePicture = ref(authStore.googleProfilePicture); // Get google profile picture from local storage
 
 const handleAuthSuccess = () => {
     isAuthenticated.value = true;

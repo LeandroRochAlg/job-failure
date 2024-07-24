@@ -4,7 +4,7 @@
             <img :src="googleLogo" alt="Google Logo" class="w-[30px]">
             <p class="text-center mx-auto align-middle text-lightDark dark:text-darkLight text-md sm:text-xl h-full">Sign in with Google</p>
         </button>
-        <p class="text-center md:w-3/4 sm:mx-auto dark:text-light text-dark sm:font-thin text-xs xl:text-sm mt-2 font-light"><a class="hover:underline" href="/https://github.com/LeandroRochAlg/job-failure">why do we ask you to connect with Google?</a></p>
+        <p class="text-center md:w-3/4 sm:mx-auto dark:text-light text-dark sm:font-thin text-xs xl:text-sm mt-2 font-light"><a class="hover:underline" href="https://github.com/LeandroRochAlg/job-failure" target="_blank">why do we ask you to connect with Google?</a></p>
     </div>
 </template>
 

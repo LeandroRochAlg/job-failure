@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { auth } from "../libs/firebaseConfig";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import api from '../services/api';
 import { UserRegister } from "../types/UserRegister";
 import { AxiosError } from "axios";
@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', {
         user: localStorage.getItem('user') || null,
         googleUser: null as any | null,
         googleUsername: localStorage.getItem('googleUsername') || '',
+        googleProfilePicture: localStorage.getItem('googleProfilePicture') || '',
         idGoogle: localStorage.getItem('idGoogle') || null,
         isAuthenticated: localStorage.getItem('idGoogle') !== null,
     }),
@@ -21,15 +22,35 @@ export const useAuthStore = defineStore('auth', {
                 const result = await signInWithPopup(auth, provider);
                 this.googleUser = result.user;
                 this.googleUsername = result.user.displayName as string;
+                this.googleProfilePicture = result.user.photoURL as string;
                 this.idGoogle = result.user.uid;
                 this.isAuthenticated = true;
 
                 localStorage.setItem('idGoogle', this.idGoogle);
                 localStorage.setItem('googleUsername', this.googleUsername);
+                localStorage.setItem('googleProfilePicture', this.googleProfilePicture);
 
                 location.reload(); // Refresh the page to update the user state
             } catch (error) {
                 console.error('Error during Google sign-in', error);
+            }
+        },
+        async signOutGoogle(){
+            try {
+                await signOut(auth);
+                this.googleUser = null;
+                this.googleUsername = '';
+                this.googleProfilePicture = '';
+                this.idGoogle = null;
+                this.isAuthenticated = false;
+
+                localStorage.removeItem('idGoogle');
+                localStorage.removeItem('googleUsername');
+                localStorage.removeItem('googleProfilePicture');
+
+                location.reload(); // Refresh the page to update the user state
+            } catch (error) {
+                console.error('Error during Google sign-out', error);
             }
         },
         async register(username: string, password: string) {
