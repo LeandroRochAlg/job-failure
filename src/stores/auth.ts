@@ -41,9 +41,11 @@ export const useAuthStore = defineStore('auth', {
                 
                 const response = await api.register(user);
                 console.log('User registered', response.data);
+                return response.data;
             } catch (error) {
                 const axiosError = error as AxiosError;
                 console.error(axiosError.response?.data);
+                return axiosError.response?.data;
             }
         },
         async login(username: string, password: string) {

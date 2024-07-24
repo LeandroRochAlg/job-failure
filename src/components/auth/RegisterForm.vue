@@ -1,30 +1,37 @@
 <template>
     <div>
-        <h2>Register</h2>
         <form @submit.prevent="register">
-            <input v-model="username" placeholder="Username" required>
-            <input v-model="password" type="password" placeholder="Password" required>
-            <button type="submit">Register</button>
+            <Input type="text" v-model="username" placeHolder="Username" position="top"/>
+            <Input type="password" v-model="password" placeHolder="Password" position="center"/>
+            <Input type="password" v-model="password" placeHolder="Confirm Password" position="bottom"/>
+            <Button :title="'Register'" :loading="loading"/>
+            <p v-if="response !== ''" class="text-center text-red">{{ response }}</p>
         </form>
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { useAuthStore } from '../../stores/auth';
 
-export default defineComponent({
-    name: 'Register',
-    setup() {
-        const authStore = useAuthStore();
-        const username = ref('');
-        const password = ref('');
+const authStore = useAuthStore();
+const username = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const loading = ref(false);
+const response = ref('');
 
-        const register = async () => {
-            await authStore.register(username.value, password.value);
-        };
-
-        return { username, password, register };
+const register = async () => {
+    if (password.value !== confirmPassword.value) {
+        response.value = 'Passwords do not match';
+        return;
     }
-});
+
+    loading.value = true;
+    try {
+        response.value = await authStore.register(username.value, password.value);
+    } finally {
+        loading.value = false;
+    }
+};
 </script>

@@ -1,31 +1,25 @@
 <template>
-    <div>
+    <Card>
+        <Title title="Register" />
         <GoogleSignIn v-if="!isAuthenticated" @auth-success="handleAuthSuccess" />
         <RegisterForm v-else />
-    </div>
+        <Alternative route="/login" />
+    </Card>
 </template>
 
-<script lang='ts'>
-import { defineComponent, ref } from 'vue';
+<script lang='ts' setup>
+import { ref } from 'vue';
+import Card from '../components/auth/Card.vue';
 import GoogleSignIn from '../components/auth/GoogleSignIn.vue';
 import RegisterForm from '../components/auth/RegisterForm.vue';
+import Title from '../components/auth/Title.vue';
+import Alternative from '../components/auth/Alternative.vue';
 import { useAuthStore } from '../stores/auth';
 
-export default defineComponent({
-    name: 'RegisterView',
-    components: {
-        GoogleSignIn,
-        RegisterForm,
-    },
-    setup() {
-        const authStore = useAuthStore();
-        const isAuthenticated = ref(authStore.isAuthenticated);
+const authStore = useAuthStore();
+const isAuthenticated = ref(authStore.isAuthenticated);
 
-        const handleAuthSuccess = () => {
-            isAuthenticated.value = true;
-        };
-
-        return { isAuthenticated, handleAuthSuccess };
-    }
-});
+const handleAuthSuccess = () => {
+    isAuthenticated.value = true;
+};
 </script>
