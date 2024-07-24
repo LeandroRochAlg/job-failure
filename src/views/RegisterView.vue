@@ -3,6 +3,7 @@
         <Title title="Register" />
         <GoogleSignIn v-if="!isAuthenticated" @auth-success="handleAuthSuccess" />
         <RegisterForm v-else />
+        <p class="text-light">{{ googleUsername }}</p>
         <Alternative route="/login" />
     </Card>
 </template>
@@ -18,6 +19,7 @@ import { useAuthStore } from '../stores/auth';
 
 const authStore = useAuthStore();
 const isAuthenticated = ref(authStore.isAuthenticated);
+const googleUsername = ref(authStore.googleUsername); // Get google username from local storage
 
 const handleAuthSuccess = () => {
     isAuthenticated.value = true;

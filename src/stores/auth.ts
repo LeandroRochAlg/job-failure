@@ -9,6 +9,7 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: localStorage.getItem('user') || null,
         googleUser: null as any | null,
+        googleUsername: localStorage.getItem('googleUsername') || '',
         idGoogle: localStorage.getItem('idGoogle') || null,
         isAuthenticated: localStorage.getItem('idGoogle') !== null,
     }),
@@ -19,10 +20,12 @@ export const useAuthStore = defineStore('auth', {
             try {
                 const result = await signInWithPopup(auth, provider);
                 this.googleUser = result.user;
+                this.googleUsername = result.user.displayName as string;
                 this.idGoogle = result.user.uid;
                 this.isAuthenticated = true;
 
                 localStorage.setItem('idGoogle', this.idGoogle);
+                localStorage.setItem('googleUsername', this.googleUsername);
 
                 location.reload(); // Refresh the page to update the user state
             } catch (error) {
