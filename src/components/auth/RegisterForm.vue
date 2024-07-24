@@ -1,9 +1,11 @@
 <template>
     <div>
-        <form @submit.prevent="register">
-            <Input type="text" v-model="username" placeHolder="Username" position="top"/>
-            <Input type="password" v-model="password" placeHolder="Password" position="center"/>
-            <Input type="password" v-model="password" placeHolder="Confirm Password" position="bottom"/>
+        <form @submit.prevent="register" class="flex flex-col h-full justify-between w-full">
+            <div class="w-full flex flex-col">
+                <Input type="text" v-model="username" placeHolder="Username" position="top"/>
+                <Input type="password" v-model="password" placeHolder="Password" position="center"/>
+                <Input type="password" v-model="password" placeHolder="Confirm Password" position="bottom"/>
+            </div>
             <Button :title="'Register'" :loading="loading"/>
             <p v-if="response !== ''" class="text-center text-red">{{ response }}</p>
         </form>
@@ -13,6 +15,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useAuthStore } from '../../stores/auth';
+import Button from './Button.vue';
+import Input from './Input.vue';
 
 const authStore = useAuthStore();
 const username = ref('');
