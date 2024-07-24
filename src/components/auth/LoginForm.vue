@@ -1,6 +1,5 @@
 <template>
     <form @submit.prevent="login" class="flex flex-col h-full justify-between w-full">
-        <Title title="Login"/>
         <div class="w-full flex flex-col">
             <Input type="text" v-model="username" placeHolder="Username" position="top"/>
             <Input type="password" v-model="password" placeHolder="Password" position="bottom"/>
@@ -15,7 +14,6 @@ import { ref } from 'vue';
 import { useAuthStore } from '../../stores/auth';
 import Button from './Button.vue';
 import Input from './Input.vue';
-import Title from './Title.vue';
 
 const authStore = useAuthStore();
 const username = ref('');

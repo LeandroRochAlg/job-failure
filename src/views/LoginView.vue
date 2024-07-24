@@ -1,5 +1,6 @@
 <template>
     <Card>
+        <Title title="Login"/>
         <LoginForm/>
         <div class="w-full flex items-center justify-center my-6">
             <div class="flex-grow border-t border-dark dark:border-light"></div>
@@ -17,5 +18,6 @@
 import LoginForm from '../components/auth/LoginForm.vue';
 import Card from '../components/auth/Card.vue';
 import Alternative from '../components/auth/Alternative.vue';
+import Title from '../components/auth/Title.vue';
 import googleLogo from '../assets/Google.png';
 </script>
