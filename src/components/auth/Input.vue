@@ -27,5 +27,5 @@ if (props.position === 'top') {
     border = 'rounded-b-xl';
 }
 
-const inputStyle = `w-[350px] focus:outline-none focus:underline hover:underline mx-auto border-none bg-darkLight dark:bg-lightDark dark:text-darkLight mt-1 ${border}`;
+const inputStyle = `w-[275px] sm:w-[350px] focus:outline-none focus:underline hover:underline mx-auto border-none bg-darkLight dark:bg-lightDark dark:text-darkLight mt-1 ${border}`;
 </script>
