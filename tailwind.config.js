@@ -31,6 +31,15 @@ export default {
       animation: {
         'pulse-fast': 'pulse 1.25s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
+      backgroundImage: theme => ({
+        'image-dark': "url('/src/assets/bg/auth/dark.png')",
+        'image-light': "url('/src/assets/bg/auth/light.png')",
+      }),
+      backgroundPosition: {
+        'bottom-center': 'center bottom',
+        'center-center': 'center center',
+        'top-center': 'center top',
+      },
     }
   },
   plugins: [
