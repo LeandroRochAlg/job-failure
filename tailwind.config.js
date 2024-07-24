@@ -10,7 +10,8 @@ export default {
       dark: '#2B2A2C',
       light: '#F1EFF5',
       lightDark: '#464547',
-      darkLight: '#DAD8E0'
+      darkLight: '#DAD8E0',
+      red: '#B22222',
     },
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],
@@ -25,8 +26,11 @@ export default {
         'shadow': 'box-shadow',
       },
       transitionDuration: {
-        '300': '300ms',
-      }
+        '200': '200ms',
+      },
+      animation: {
+        'pulse-fast': 'pulse 1.25s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
     }
   },
   plugins: [

@@ -59,9 +59,12 @@ export const useAuthStore = defineStore('auth', {
 
                 // Redirect to the home page
                 location.href = '/home';
+
+                return true;
             } catch (error) {
                 const axiosError = error as AxiosError;
                 console.error(axiosError.response?.data);
+                return false;
             }
         },
         async logout() {
