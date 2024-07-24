@@ -5,7 +5,9 @@
             <Input type="password" v-model="password" placeHolder="Password" position="bottom"/>
         </div>
         <Button :title="'Login'" :loading="loading"/>
-        <p v-if="!response" class="text-center text-red">Ops... You can't go there 👉</p>
+        <Error v-if="!response">
+            <span>{{ "Ops... You can't go there 👉" }}</span>
+        </Error>
     </form>
 </template>
 
@@ -14,6 +16,7 @@ import { ref } from 'vue';
 import { useAuthStore } from '../../stores/auth';
 import Button from './Button.vue';
 import Input from './Input.vue';
+import Error from './Error.vue';
 
 const authStore = useAuthStore();
 const username = ref('');

@@ -7,7 +7,9 @@
                 <Input type="password" v-model="password" placeHolder="Confirm Password" position="bottom"/>
             </div>
             <Button :title="'Register'" :loading="loading"/>
-            <p v-if="response !== ''" class="text-center text-red">{{ response }}</p>
+            <Error v-if="response !== ''" class="text-center text-red">
+                <span>{{ response }}</span>
+            </Error>
         </form>
     </div>
 </template>
@@ -17,6 +19,7 @@ import { ref } from 'vue';
 import { useAuthStore } from '../../stores/auth';
 import Button from './Button.vue';
 import Input from './Input.vue';
+import Error from './Error.vue';
 
 const authStore = useAuthStore();
 const username = ref('');
@@ -26,12 +29,8 @@ const loading = ref(false);
 const response = ref('');
 
 const register = async () => {
-    if (password.value !== confirmPassword.value) {
-        response.value = 'Passwords do not match';
-        return;
-    }
-
     loading.value = true;
+
     try {
         response.value = await authStore.register(username.value, password.value);
     } finally {
