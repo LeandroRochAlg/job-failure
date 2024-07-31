@@ -5,6 +5,7 @@ import api from '../services/api';
 import { UserRegister } from "../types/UserRegister";
 import { UserGoogleLogin } from "../types/UserGoogleLogin";
 import { AxiosError } from "axios";
+import router from "../router";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -75,6 +76,9 @@ export const useAuthStore = defineStore('auth', {
                 
                 const response = await api.register(user);
                 console.log('User registered', response.data);
+
+                router.push('/login'); // Redirect to the login page
+
                 return response.data;
             } catch (error) {
                 const axiosError = error as AxiosError;
@@ -130,6 +134,12 @@ export const useAuthStore = defineStore('auth', {
             } catch (error) {
                 const axiosError = error as AxiosError;
                 console.error(axiosError.response?.data);
+
+                if (axiosError.response?.status === 404) {
+                    // Redirect to the register page if the user is not found
+                    location.href = '/register';
+                }
+
                 return false;
             }
         }
