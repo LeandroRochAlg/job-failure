@@ -16,5 +16,8 @@ const authStore = useAuthStore();
 
 const signInWithGoogle = async () => {
     await authStore.signInWithGoogle();
+
+    // Reload the page to update the user's information
+    location.reload();
 };
 </script>

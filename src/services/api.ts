@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UserRegister } from "../types/UserRegister";
+import { UserGoogleLogin } from "../types/UserGoogleLogin";
 
 const apiClient = axios.create({
     baseURL: `${import.meta.env.VITE_API_URL}/api`,
@@ -19,6 +20,9 @@ export default {
     },
     logout() {
         return apiClient.post("/auth/logout");
+    },
+    loginWithGoogle(user: UserGoogleLogin) {
+        return apiClient.post("/auth/google", user);
     },
     check() {
         return apiClient.get("/secure/check");
