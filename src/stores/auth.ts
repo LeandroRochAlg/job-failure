@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import api from '../services/api';
 import { UserRegister } from "../types/UserRegister";
 import { UserGoogleLogin } from "../types/UserGoogleLogin";
+import { UserLogin } from "../types/UserLogin";
 import { AxiosError } from "axios";
 import router from "../router";
 
@@ -86,11 +87,12 @@ export const useAuthStore = defineStore('auth', {
                 return axiosError.response?.data;
             }
         },
-        async login(username: string, password: string) {
+        async login(username: string, password: string, rememberMe: boolean) {
             try {
-                const user: UserRegister = {
+                const user: UserLogin = {
                     username,
                     password,
+                    rememberMe,
                 };
 
                 const response = await api.login(user);
