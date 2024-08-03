@@ -5,6 +5,10 @@
             <Error v-if="errors.username" class="my-0">
                 <span>{{ errors.username }}</span>
             </Error>
+            <Input v-if="!isAuthenticated" type="email" v-model="email" placeHolder="Email" position="center" @blur="validateEmail"/>
+            <Error v-if="errors.email && !isAuthenticated" class="my-0">
+                <span>{{ errors.email }}</span>
+            </Error>
             <Input type="password" v-model="password" placeHolder="Password" position="center" @blur="validatePassword"/>
             <Error v-if="errors.password" class="my-0">
                 <span>{{ errors.password }}</span>
@@ -30,11 +34,13 @@ import Error from './Error.vue';
 
 const authStore = useAuthStore();
 const username = ref('');
+const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const loading = ref(false);
+const isAuthenticated = ref(authStore.isAuthenticated);
 const response = ref('');
-const errors = ref({ username: '', password: '', confirmPassword: '' });
+const errors = ref({ username: '', email: '', password: '', confirmPassword: '' });
 
 const validateUsername = () => {
     if (!username.value) {
@@ -43,6 +49,17 @@ const validateUsername = () => {
         errors.value.username = 'Username must be at least 3 characters long';
     } else {
         errors.value.username = '';
+    }
+};
+
+const validateEmail = () => {
+    const emailValue = email.value;
+    if (!emailValue) {
+        errors.value.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+        errors.value.email = 'Email is invalid';
+    } else {
+        errors.value.email = '';
     }
 };
 
@@ -79,6 +96,7 @@ const hasErrors = computed(() => {
 
 const register = async () => {
     validateUsername();
+    validateEmail();
     validatePassword();
     validateConfirmPassword();
 
@@ -89,7 +107,7 @@ const register = async () => {
     loading.value = true;
 
     try {
-        response.value = await authStore.register(username.value, password.value);
+        response.value = await authStore.register(username.value, email.value, password.value);
     } catch (error: any) {
         response.value = error.message;
     } finally {

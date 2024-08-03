@@ -1,8 +1,9 @@
 <template>
     <Card>
         <Title title="Register" />
-        <GoogleSignIn v-if="!isAuthenticated" @auth-success="handleAuthSuccess" />
+        <GoogleSignIn v-if="!isAuthenticated && isGoogleUser" @auth-success="handleAuthSuccess" />
         <RegisterForm v-else />
+        <button v-if="!isAuthenticated" class="text-dark dark:text-light hover:font-semibold text-sm tracking-wider hover:tracking-wide" @click="handleContinueWithoutGoogle">{{ isGoogleUser ? "Continue without Google" : "Sign in with Google" }}</button>
         <GoogleUser v-if="isAuthenticated" :profile-pic="googleProfilePicture" :username="googleUsername"/>
         <Alternative route="/login" />
     </Card>
@@ -20,10 +21,17 @@ import { useAuthStore } from '../stores/auth';
 
 const authStore = useAuthStore();
 const isAuthenticated = ref(authStore.isAuthenticated);
+const isGoogleUser = ref(authStore.isGoogleUser as boolean); // Get isGoogleUser from local storage
 const googleUsername = ref(authStore.googleUsername); // Get google username from local storage
 const googleProfilePicture = ref(authStore.googleProfilePicture); // Get google profile picture from local storage
 
 const handleAuthSuccess = () => {
     isAuthenticated.value = true;
+};
+
+const handleContinueWithoutGoogle = () => {
+    isGoogleUser.value = !isGoogleUser.value;
+
+    authStore.isGoogleUser = isGoogleUser.value;
 };
 </script>

@@ -18,6 +18,7 @@ export const useAuthStore = defineStore('auth', {
         emailGoogle: localStorage.getItem('emailGoogle') || null,
         tokenGoogle: localStorage.getItem('tokenGoogle') || null,
         isAuthenticated: localStorage.getItem('idGoogle') !== null,
+        isGoogleUser: true,
     }),
     actions: {
         async signInWithGoogle() {
@@ -63,17 +64,19 @@ export const useAuthStore = defineStore('auth', {
                 console.error('Error during Google sign-out', error);
             }
         },
-        async register(username: string, password: string) {
+        async register(username: string, email: string, password: string) {
             try {
-                console.log(this.idGoogle);
+                console.log('Registering user', username, email, password, this.isGoogleUser);
 
                 const user: UserRegister = {
                     username,
                     password,
-                    idGoogle: this.idGoogle as string,
-                    email: this.emailGoogle as string,
-                    tokenGoogle: this.tokenGoogle as string,
+                    idGoogle: this.isGoogleUser ? this.idGoogle as string : "N/A",
+                    email: this.isGoogleUser ? this.emailGoogle as string : email,
+                    tokenGoogle: this.isGoogleUser ? this.tokenGoogle as string : "N/A",
                 };
+
+                console.log('User to register', user);
                 
                 const response = await api.register(user);
                 console.log('User registered', response.data);
