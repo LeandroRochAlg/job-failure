@@ -1,10 +1,10 @@
 <template>
     <Card>
-        <Title title="Login"/>
+        <Title :title="$t('login')"/>
         <LoginForm/>
         <div class="w-full flex items-center justify-center my-6">
             <div class="flex-grow border-t border-dark dark:border-light"></div>
-            <span class="mx-2 text-dark text-sm dark:text-light">or login with</span>
+            <span class="mx-2 text-dark text-sm dark:text-light">{{ $t('orLoginWith') }}</span>
             <div class="flex-grow border-t border-dark dark:border-light"></div>
         </div>
         <button class="flex mx-auto hover:bg-darkLight dark:hover:bg-lightDark p-2 rounded-xl" @click="handleGoogleLogin">

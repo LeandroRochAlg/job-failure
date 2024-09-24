@@ -1,13 +1,13 @@
 <template>
     <form @submit.prevent="login" class="flex flex-col h-full justify-evenly w-full">
         <div class="w-full flex flex-col">
-            <Input type="text" v-model="username" placeHolder="Username" position="top"/>
-            <Input type="password" v-model="password" placeHolder="Password" position="bottom"/>
+            <Input type="text" v-model="username" :placeHolder="$t('username')" position="top"/>
+            <Input type="password" v-model="password" :placeHolder="$t('password')" position="bottom"/>
         </div>
         <KeepConnected :onKeepConnectedChange="handleKeepConnectedChange"/>
-        <Button :title="'Login'" :loading="loading"/>
+        <Button :title="$t('login')" :loading="loading"/>
         <Error v-if="!response">
-            <span>{{ "Ops... You can't go there 👉" }}</span>
+            <span>{{ $t('loginError') }}</span>
         </Error>
     </form>
 </template>

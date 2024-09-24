@@ -1,9 +1,11 @@
 <template>
     <Card>
-        <Title title="Register" />
+        <Title :title="$t('register')" />
         <GoogleSignIn v-if="!isAuthenticated && isGoogleUser" @auth-success="handleAuthSuccess" />
         <RegisterForm v-else />
-        <button v-if="!isAuthenticated" class="text-dark dark:text-light hover:font-semibold text-sm tracking-wider hover:tracking-wide" @click="handleContinueWithoutGoogle">{{ isGoogleUser ? "Continue without Google" : "Sign in with Google" }}</button>
+        <button v-if="!isAuthenticated" class="text-dark dark:text-light hover:font-semibold text-sm tracking-wider hover:tracking-wide" @click="handleContinueWithoutGoogle">
+            {{ isGoogleUser ? $t('continueWithoutGoogle') : $t('signInWithGoogle') }}
+        </button>
         <GoogleUser v-if="isAuthenticated" :profile-pic="googleProfilePicture" :username="googleUsername"/>
         <Alternative route="/login" />
     </Card>

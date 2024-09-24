@@ -1,24 +1,24 @@
 <template>
     <form @submit.prevent="register" class="flex flex-col h-full justify-evenly w-full">
         <div class="w-full flex flex-col">
-            <Input type="text" v-model="username" placeHolder="Username" position="top" @blur="validateUsername"/>
+            <Input type="text" v-model="username" :placeHolder="$t('username')" position="top" @blur="validateUsername"/>
             <Error v-if="errors.username" class="my-0">
-                <span>{{ errors.username }}</span>
+                <span>{{ $t(`validation.${errors.username}`) }}</span>
             </Error>
-            <Input v-if="!isAuthenticated" type="email" v-model="email" placeHolder="Email" position="center" @blur="validateEmail"/>
+            <Input v-if="!isAuthenticated" type="email" v-model="email" :placeHolder="$t('email')" position="center" @blur="validateEmail"/>
             <Error v-if="errors.email && !isAuthenticated" class="my-0">
-                <span>{{ errors.email }}</span>
+                <span>{{ $t(`validation.${errors.email}`) }}</span>
             </Error>
-            <Input type="password" v-model="password" placeHolder="Password" position="center" @blur="validatePassword"/>
+            <Input type="password" v-model="password" :placeHolder="$t('password')" position="center" @blur="validatePassword"/>
             <Error v-if="errors.password" class="my-0">
-                <span>{{ errors.password }}</span>
+                <span>{{ $t(`validation.${errors.password}`) }}</span>
             </Error>
-            <Input type="password" v-model="confirmPassword" placeHolder="Confirm Password" position="bottom" @blur="validateConfirmPassword"/>
+            <Input type="password" v-model="confirmPassword" :placeHolder="$t('confirmPassword')" position="bottom" @blur="validateConfirmPassword"/>
             <Error v-if="errors.confirmPassword" class="my-0">
-                <span>{{ errors.confirmPassword }}</span>
+                <span>{{ $t(`validation.${errors.confirmPassword}`) }}</span>
             </Error>
         </div>
-        <Button :title="'Register'" :loading="loading"/>
+        <Button :title="$t('register')" :loading="loading"/>
         <Error v-if="response !== ''" class="text-center text-red">
             <span>{{ response }}</span>
         </Error>
@@ -44,9 +44,9 @@ const errors = ref({ username: '', email: '', password: '', confirmPassword: '' 
 
 const validateUsername = () => {
     if (!username.value) {
-        errors.value.username = 'Username is required';
+        errors.value.username = 'usernameRequired';
     } else if (username.value.length < 3) {
-        errors.value.username = 'Username must be at least 3 characters long';
+        errors.value.username = 'usernameLength';
     } else {
         errors.value.username = '';
     }
@@ -55,9 +55,9 @@ const validateUsername = () => {
 const validateEmail = () => {
     const emailValue = email.value;
     if (!emailValue) {
-        errors.value.email = 'Email is required';
+        errors.value.email = 'emailRequired';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
-        errors.value.email = 'Email is invalid';
+        errors.value.email = 'emailInvalid';
     } else {
         errors.value.email = '';
     }
@@ -66,17 +66,17 @@ const validateEmail = () => {
 const validatePassword = () => {
     const passwordValue = password.value;
     if (!passwordValue) {
-        errors.value.password = 'Password is required';
+        errors.value.password = 'passwordRequired';
     } else if (passwordValue.length < 6) {
-        errors.value.password = 'Password must be at least 6 characters long';
+        errors.value.password = 'passwordLength';
     } else if (!/[0-9]/.test(passwordValue)) {
-        errors.value.password = 'Password must contain at least one digit';
+        errors.value.password = 'passwordDigit';
     } else if (!/[a-z]/.test(passwordValue)) {
-        errors.value.password = 'Password must contain at least one lowercase letter';
+        errors.value.password = 'passwordLowercase';
     } else if (!/[A-Z]/.test(passwordValue)) {
-        errors.value.password = 'Password must contain at least one uppercase letter';
+        errors.value.password = 'passwordUppercase';
     } else if (!/[^a-zA-Z0-9]/.test(passwordValue)) {
-        errors.value.password = 'Password must contain at least one non-alphanumeric character';
+        errors.value.password = 'passwordNonAlphanumeric';
     } else {
         errors.value.password = '';
     }
@@ -84,14 +84,14 @@ const validatePassword = () => {
 
 const validateConfirmPassword = () => {
     if (confirmPassword.value !== password.value) {
-        errors.value.confirmPassword = 'Passwords do not match';
+        errors.value.confirmPassword = 'passwordsDontMatch';
     } else {
         errors.value.confirmPassword = '';
     }
 };
 
 const hasErrors = computed(() => {
-    return !!errors.value.username || !!errors.value.password || !!errors.value.confirmPassword;
+    return !!errors.value.username || !!errors.value.email || !!errors.value.password || !!errors.value.confirmPassword;
 });
 
 const register = async () => {
