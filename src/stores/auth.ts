@@ -81,7 +81,7 @@ export const useAuthStore = defineStore('auth', {
                 const response = await api.register(user);
                 console.log('User registered', response.data);
 
-                router.push('/login'); // Redirect to the login page
+                router.push({ name: 'Login' }); // Redirect to the login page
 
                 return response.data;
             } catch (error) {
@@ -103,7 +103,7 @@ export const useAuthStore = defineStore('auth', {
                 console.log('User logged in', response.data);
 
                 // Redirect to the home page
-                location.href = '/home';
+                router.push({ name: 'Home' });
 
                 return true;
             } catch (error) {
@@ -116,7 +116,7 @@ export const useAuthStore = defineStore('auth', {
             try {
                 await api.logout();
 
-                location.href = '/login'; // Redirect to the login page
+                router.push({ name: 'Login' }); // Redirect to the login page
             } catch (error) {
                 console.error('Error during logout', error);
             }
@@ -133,7 +133,7 @@ export const useAuthStore = defineStore('auth', {
                 console.log('User logged in with Google', response.data);
 
                 // Redirect to the home page
-                location.href = '/home';
+                router.push({ name: 'Home' });
 
                 return true;
             } catch (error) {
@@ -142,7 +142,7 @@ export const useAuthStore = defineStore('auth', {
 
                 if (axiosError.response?.status === 404) {
                     // Redirect to the register page if the user is not found
-                    location.href = '/register';
+                    router.push({ name: 'Register' });
                 }
 
                 return false;

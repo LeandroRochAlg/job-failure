@@ -10,7 +10,7 @@
         <button class="flex mx-auto hover:bg-darkLight dark:hover:bg-lightDark p-2 rounded-xl" @click="handleGoogleLogin">
             <img :src="googleLogo" alt="Google Logo" class="w-[30px]">
         </button>
-        <Alternative route='/register'/>
+        <Alternative route='Register'/>
     </Card>
 </template>
 

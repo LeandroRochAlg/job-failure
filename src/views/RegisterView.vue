@@ -7,7 +7,7 @@
             {{ isGoogleUser ? $t('continueWithoutGoogle') : $t('signInWithGoogle') }}
         </button>
         <GoogleUser v-if="isAuthenticated" :profile-pic="googleProfilePicture" :username="googleUsername"/>
-        <Alternative route="/login" />
+        <Alternative route="Login" />
     </Card>
 </template>
 

@@ -29,5 +29,6 @@
     "whyConnectWithGoogle": "why do we ask you to connect with Google?",
     "continueWithoutGoogle": "Continue without Google",
     "connected": "connected!",
-    "connectWithAnother": "Connect with another account?"
+    "connectWithAnother": "Connect with another account?",
+    "home": "Home"
 }
