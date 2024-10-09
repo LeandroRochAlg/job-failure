@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '../../stores/auth';
-import { defineProps } from 'vue';
 
 const props = defineProps({
     profilePic: String,
